@@ -20,12 +20,12 @@ def scan(entrada):
 		try:
 			operar(cadena)
 		except :
-			print("error") 
+			print("Syntax Error") 
 	else:
-		print("error")
-		
+		print("Syntax Error")
+
 def operar(entrada):
-	patron = '\-\d*\.?\d+|\+\d*\.?\d+|\d*\.?\d+|\w+[(][^)]+[)]|\+\w+[(][^)]+[)]|\-\w+[(][^)]+[)]'
+	patron = '\/\d*\.?\d+|\*\d*\.?\d+|\-\d*\.?\d+|\+\d*\.?\d+|\d*\.?\d+|\w+[(][^)]+[)]|\+\w+[(][^)]+[)]|\-\w+[(][^)]+[)]'
 	cadena = re.findall(patron,entrada)
 
 	solve = ""
