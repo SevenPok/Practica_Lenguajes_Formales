@@ -14,15 +14,25 @@ def main():
 def scan(entrada):
 	comando = str(entrada).lower()
 	if 'solve' in comando and '[' in comando and ']' in comando:
-		cadena = comando.replace("solve", "")
-		cadena = cadena.replace("[", "").replace("]", "")
-		cadena = cadena.replace(" ", "")
+		comando = cortar(comando)
 		try:
-			operar(cadena)
+			operar(comando)
 		except :
 			print("Syntax Error") 
+	elif 'sum' in comando and '[' in comando and  ']' in comando:
+		comando = cortar(comando)
+		try:
+			sum(comando)
+		except :
+			print("Syntax Error")
 	else:
 		print("Syntax Error")
+
+def cortar(entrada):
+	cadena = entrada.replace("solve", "")
+	cadena = cadena.replace("[", "").replace("]", "")
+	cadena = cadena.replace(" ", "")
+	return entrada
 
 def operar(entrada):
 	patron = '\/\d*\.?\d+|\*\d*\.?\d+|\-\d*\.?\d+|\+\d*\.?\d+|\d*\.?\d+|\w+[(][^)]+[)]|\+\w+[(][^)]+[)]|\-\w+[(][^)]+[)]'
@@ -61,5 +71,13 @@ def operar(entrada):
 		else:
 			solve = solve + i
 	print(eval(solve))
-    
+
+def sum(entrada):
+	patron = '\d*\.?\d+|\-\d*\.?\d+'
+	cadena = re.findall(patron, entrada)
+	lista = []
+	for i in cadena:
+		lista.append(float(i))
+	print(Metodos.suma(lista))
+
 main()
