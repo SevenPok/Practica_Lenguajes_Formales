@@ -1,20 +1,33 @@
 import re
 import Metodos
+import sys
 
-
+def main():
+	print("Practica 1 Lenguajes formales")
+	while True:
+		print(">> ", end="")
+		entrada = input()
+		if entrada.lower() == "exit":
+			sys.exit()
+		scan(entrada)
 
 def scan(entrada):
 	comando = str(entrada).lower()
-	if 'solve' in comando:
+	if 'solve' in comando and '[' in comando and ']' in comando:
 		cadena = comando.replace("solve", "")
 		cadena = cadena.replace("[", "").replace("]", "")
 		cadena = cadena.replace(" ", "")
-		operar(cadena)
-
+		try:
+			operar(cadena)
+		except :
+			print("error") 
+	else:
+		print("error")
+		
 def operar(entrada):
 	patron = '\-\d*\.?\d+|\+\d*\.?\d+|\d*\.?\d+|\w+[(][^)]+[)]|\+\w+[(][^)]+[)]|\-\w+[(][^)]+[)]'
 	cadena = re.findall(patron,entrada)
-	print(cadena)
+
 	solve = ""
 	for i in cadena:
 		if 'fact' in i:
@@ -49,3 +62,4 @@ def operar(entrada):
 			solve = solve + i
 	print(eval(solve))
     
+main()
