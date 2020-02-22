@@ -63,7 +63,7 @@ def QuickSort(numeros, izq, der):
         QuickSort(numeros,j+1,der)
 
 def triangleDes(n):
-    if n == 0:
+    if n < 0:
         return 
     else:
         for i in range(0,n):
@@ -72,7 +72,7 @@ def triangleDes(n):
         triangleDes(n-1)
 
 def triangleAsc(n, inicio):
-    if n == 0:
+    if n < 0:
         return
     else:
         for i in range(0,inicio):
@@ -108,3 +108,4 @@ def rombo(n):
     if n > 0:
         piramide(n,0)
         piramideInv(n,0)
+

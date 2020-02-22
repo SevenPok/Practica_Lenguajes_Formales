@@ -25,6 +25,16 @@ def scan(entrada):
 			sum(comando)
 		except :
 			print("Syntax Error")
+	elif 'drawtriangle' in comando and '--type=asc' in comando and '--length=' in comando:
+		try:
+			triangle(comando)
+		except :
+			print("Syntax Error")
+	elif 'drawtriangle' in comando and '--type=desc' in comando and '--length=' in comando:
+		try:
+			triangleDes(comando)
+		except :
+			print("Syntax Error")
 	else:
 		print("Syntax Error")
 
@@ -35,7 +45,7 @@ def cortar(entrada):
 	return entrada
 
 def operar(entrada):
-	patron = '\/\d*\.?\d+|\*\d*\.?\d+|\-\d*\.?\d+|\+\d*\.?\d+|\d*\.?\d+|\w+[(][^)]+[)]|\+\w+[(][^)]+[)]|\-\w+[(][^)]+[)]'
+	patron = '\/\d*\.?\d+|\*\d*\.?\d+|\-\d*\.?\d+|\+\d*\.?\d+|\d*\.?\d+|\w+[(][^)]+[)]|\+\w+[(][^)]+[)]|\-\w+[(][^)]+[)]|\*\w+[(][^)]+[)]|\/clea\w+[(][^)]+[)]'
 	cadena = re.findall(patron,entrada)
 
 	solve = ""
@@ -80,4 +90,15 @@ def sum(entrada):
 		lista.append(float(i))
 	print(Metodos.suma(lista))
 
+def triangle(entrada):
+	patron = '\d+'
+	cadena = re.findall(patron, entrada)
+	Metodos.triangleAsc(int(cadena[0]), 0)
+
+def triangleDes(entrada):
+	patron = '\d+'
+	cadena = re.findall(patron, entrada)
+	Metodos.triangleDes(int(cadena[0]))
+
+#triangle('drawTriangle --type=asc --length=10 ')
 main()
