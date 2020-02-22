@@ -6,10 +6,10 @@ def main():
 	print("Practica 1 Lenguajes formales")
 	while True:
 		print(">> ", end="")
-		entrada = input()
-		if entrada.lower() == "exit":
+		cadena = input()
+		if cadena.lower() == "exit":
 			sys.exit()
-		scan(entrada)
+		scan(cadena)
 
 def scan(entrada):
 	comando = str(entrada).lower()
@@ -25,6 +25,13 @@ def scan(entrada):
 			sum(comando)
 		except :
 			print("Syntax Error")
+	elif 'sort' in comando and '--type=':
+		comando = cortar(comando)
+		try:
+			sort(comando)
+		except :
+			print("Syntax Error")
+		pass
 	elif 'drawtriangle' in comando and '--type=asc' in comando and '--length=' in comando:
 		try:
 			triangle(comando)
@@ -34,6 +41,16 @@ def scan(entrada):
 		try:
 			triangleDes(comando)
 		except :
+			print("Syntax Error")
+	elif 'drawrhombus' in comando and '--size=' in comando:
+		try:
+			rombo(comando)
+		except :
+			print("Syntax Error")
+	elif 'exec' in comando and '--file=' in comando:
+		try:
+			documento(exec(comando))
+		except:
 			print("Syntax Error")
 	else:
 		print("Syntax Error")
@@ -100,5 +117,43 @@ def triangleDes(entrada):
 	cadena = re.findall(patron, entrada)
 	Metodos.triangleDes(int(cadena[0]))
 
-#triangle('drawTriangle --type=asc --length=10 ')
+def sort(entrada):
+	patron = '\d*\.?\d+|\-\d*\.?\d+'
+	cadena = re.findall(patron, entrada)
+	lista = []
+	for i in cadena:
+		lista.append(float(i))
+	Metodos.QuickSort((lista),0,len(lista) - 1)
+	if 'asc' in entrada:
+		print(lista)
+	elif 'desc' in entrada:
+		print(lista[::-1])
+	else:
+		print("Syntax Error")
+
+def rombo(entrada):
+	patron = '\d+'
+	cadena = re.findall(patron, entrada)
+	Metodos.rombo(int(cadena[0]))
+
+def exec(entrada):
+	patron = '["][^"]+["]'
+	cadena = re.findall(patron, entrada)
+	try:
+		cadena = cadena[0].replace("\"", "")
+		return cadena
+	except :
+		print("Syntax Error")
+
+def documento(entrada):
+	fic = open(entrada, "r")
+	lines = []
+	for line in fic:
+		if line not in "\n":
+   			lines.append(line)
+	fic.close()
+
+	for i in lines:
+		scan(i)
+
 main()
