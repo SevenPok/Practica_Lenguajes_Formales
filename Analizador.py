@@ -154,6 +154,7 @@ def documento(entrada):
 	fic.close()
 
 	for i in lines:
+		
 		scan(i)
-
+		print("")
 main()
